@@ -1,0 +1,50 @@
+<ng-container *ngIf="selectedIp() as ip">
+  <h4 class="headline-4">Настройки камеры</h4>
+
+  <ng-container *ngFor="let key of keys">
+
+    <div *ngIf="isToggle(key)" class="d-flex justify-content-between mt-2">
+      <label class="my-auto">{{ key | prettyKey }}</label>
+      <mat-slide-toggle
+        [checked]="settings()[key] === 1"
+        (change)="setOption(key, $event.checked ? 1 : 0)"
+        color="primary"
+      ></mat-slide-toggle>
+    </div>
+
+    <ng-container *ngFor="let field of selectFields">
+      <mat-form-field *ngIf="key === field.key" appearance="fill" class="w-100 my-2">
+        <mat-label>{{ key | prettyKey }}</mat-label>
+        <mat-select [value]="settings()[key]" (selectionChange)="setOption(key, $event.value)">
+          <mat-option *ngFor="let val of options[key]" [value]="val">
+            {{ field.labels[val] }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+
+    <div *ngIf="isSlider(key)">
+      <div class="w-100">
+        <label>{{ key | prettyKey }}</label>
+      </div>
+      <div class="w-100">
+        <mat-slider
+          [min]="getMin(key)"
+          [max]="getMax(key)"
+          [step]="getStep(key)"
+          [discrete]="true"
+          [showTickMarks]="true"
+          class="mx-auto w-100">
+          <input
+            matSliderThumb
+            type="range"
+            [value]="settings()[key]"
+            (input)="setOption(key, +$any($event.target).value)"
+          />
+        </mat-slider>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="!selectedIp()">Нет выбранного автобуса</ng-container>
