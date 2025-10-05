@@ -20,8 +20,9 @@ async def add_measurement(
         info: InfoFromCameraManager = Depends(get_info_manager),
 ):
     occ = round(float(payload.occupancy_pct), 2)
+    ts = payload.ts or datetime.utcnow()
     try:
-        created = await info.add_measurement(camera_id=camera_id, ts=payload.ts, occupancy_pct=occ)
+        created = await info.add_measurement(camera_id=camera_id, ts=ts, occupancy_pct=occ)
     except KeyError:
         raise HTTPException(status_code=404, detail="Camera not found")
     return MeasurementOut(**created)
