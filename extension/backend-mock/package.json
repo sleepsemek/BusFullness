@@ -1,0 +1,17 @@
+{
+  "name": "backend-mock",
+  "version": "1.0.0",
+  "description": "mock backend for 2gis chrome extension",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "sleepsemek",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}

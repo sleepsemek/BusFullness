@@ -20,7 +20,7 @@
 
 - [api/README.md](./api/README.md)
 - [ml/README.md](./ml/README.md)
-- [extensions/README.md](./extensions/README.md)
+- [extensions/README.md](extension/README.md)
 
 ---
 
